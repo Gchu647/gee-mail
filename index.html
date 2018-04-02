@@ -5,14 +5,19 @@
     <script>
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
-        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
+        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser 
+
+        // I am finally able to use three of the five functions in "mail-generator" when the Self-Invoking Function is not there!
+        document.getElementById('container').innerHTML = generateMessage(getRandomDate()).date+"<br>"+generateMessage(getRandomDate()).subject+"<br>"+generateMessage(getRandomDate()).sender+"<br>"+generateMessage(getRandomDate()).body;
       };
+
     </script>
+
 	</head>
 	<body>
 		<div class="container" id="main">
-			Build Me!
+			Build Me! Testing Testing
 		</div>
+
 	</body>
 </html>
