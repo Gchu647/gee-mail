@@ -6,50 +6,15 @@
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
 
-        document.getElementById("d1").innerHTML = geemails[0].date; 
-        document.getElementById("sub1").innerHTML = geemails[0].subject; 
-        document.getElementById("sen1").innerHTML = geemails[0].sender; 
+        //Loading inital message using for loop
+      	var loaddata = "";
 
+				for (i = 0; i < geemails.length; i++) {
+    			loaddata += "<tr>"+ "<td>"+geemails[i].date+"</td>" + "<td>"+geemails[i].subject+"</td>" + "<td>"+geemails[i].sender+"</td>" +"</tr>";
+				}
+				
+				document.getElementById("loadmail").innerHTML = "<tr>"+"<td><b>Date</b></td>"+"<td><b>Subject</b></td>"+"<td><b>Date</b></td>"+"</tr>" + loaddata;
 
-        document.getElementById("d2").innerHTML = geemails[1].date; 
-        document.getElementById("sub2").innerHTML = geemails[1].subject; 
-        document.getElementById("sen2").innerHTML = geemails[1].sender; 
-
-
-        document.getElementById("d3").innerHTML = geemails[2].date; 
-        document.getElementById("sub3").innerHTML = geemails[2].subject; 
-        document.getElementById("sen3").innerHTML = geemails[2].sender; 
-
-
-        document.getElementById("d4").innerHTML = geemails[3].date; 
-        document.getElementById("sub4").innerHTML = geemails[3].subject; 
-        document.getElementById("sen4").innerHTML = geemails[3].sender; 
-
-
-        document.getElementById("d5").innerHTML = geemails[4].date; 
-        document.getElementById("sub5").innerHTML = geemails[4].subject; 
-        document.getElementById("sen5").innerHTML = geemails[4].sender; 
-
-
-        document.getElementById("d6").innerHTML = geemails[5].date; 
-        document.getElementById("sub6").innerHTML = geemails[5].subject; 
-        document.getElementById("sen6").innerHTML = geemails[5].sender;
-
-        document.getElementById("d7").innerHTML = geemails[6].date; 
-        document.getElementById("sub7").innerHTML = geemails[6].subject; 
-        document.getElementById("sen7").innerHTML = geemails[6].sender; 
-
-        document.getElementById("d8").innerHTML = geemails[7].date; 
-        document.getElementById("sub8").innerHTML = geemails[7].subject; 
-        document.getElementById("sen8").innerHTML = geemails[7].sender; 
-
-        document.getElementById("d9").innerHTML = geemails[8].date; 
-        document.getElementById("sub9").innerHTML = geemails[8].subject; 
-        document.getElementById("sen9").innerHTML = geemails[8].sender; 
-
-        document.getElementById("d10").innerHTML = geemails[9].date; 
-        document.getElementById("sub10").innerHTML = geemails[9].subject; 
-        document.getElementById("sen10").innerHTML = geemails[9].sender; 
       };
 
     </script>
@@ -58,80 +23,14 @@
 
 	<body>
 		<header><h1>Gee-Mail</h1></header>
-
 		<br>
 
 		<div class="container" id="main">
-			<table border="1">
-				
-				<tr> 
-					<td>Date</td>
-					<td>Subject</td>
-					<td>Sender</td>
-				</tr>
-
-				<tr> 
-					<td id="d1"></td>
-					<td id="sub1"></td>
-					<td id="sen1"></td>
-				</tr>
-
-				<tr> 
-					<td id="d2"></td>
-					<td id="sub2"></td>
-					<td id="sen2"></td>
-				</tr>
-
-				<tr> 
-					<td id="d3"></td>
-					<td id="sub3"></td>
-					<td id="sen3"></td>
-				</tr>
-
-				<tr> 
-					<td id="d4"></td>
-					<td id="sub4"></td>
-					<td id="sen4"></td>
-				</tr>
-
-				<tr> 
-					<td id="d5"></td>
-					<td id="sub5"></td>
-					<td id="sen5"></td>
-				</tr>
-
-				<tr> 
-					<td id="d6"></td>
-					<td id="sub6"></td>
-					<td id="sen6"></td>
-				</tr>
-
-				<tr> 
-					<td id="d7"></td>
-					<td id="sub7"></td>
-					<td id="sen7"></td>
-				</tr>
-
-				<tr> 
-					<td id="d8"></td>
-					<td id="sub8"></td>
-					<td id="sen8"></td>
-				</tr>
-
-				<tr> 
-					<td id="d9"></td>
-					<td id="sub9"></td>
-					<td id="sen9"></td>
-				</tr>
-
-				<tr> 
-					<td id="d10"></td>
-					<td id="sub10"></td>
-					<td id="sen10"></td>
-				</tr>
+			
+			<table id="loadmail" border="3px"></table>
+			<p id="n.m"></p>
 
 
-			</table>
 		</div>
 
 	</body>
