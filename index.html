@@ -12,7 +12,7 @@
 
 				for (i = 0; i < geemails.length; i++) {
     			loaddata += "<tr>"+ "<td>"+geemails[i].date+"</td>" + "<td>"+geemails[i].subject+"</td>" + "<td>"+geemails[i].sender+"</td>" +"</tr>";
-				} 
+				}
 
 				
 				document.getElementById("loadmail").innerHTML =  topicheads + loaddata;
@@ -21,8 +21,10 @@
 				//Cant find a way to put create buttons using the for loop
 				document.getElementById('messagebody').innerHTML = "<b>Message Content:</b><br>" + geemails[1].body;
 
-				//Create a new message similar to the old messages
-				document.getElementById("n.m").innerHTML = topicheads + "<tr>"+ "<td>"+getNewMessage().date+"</td>" + "<td>"+getNewMessage().subject+"</td>" + "<td>"+getNewMessage().sender+"</td>" +"</tr>";
+				//Creates a new message similar to the old messages every 3 seconds				
+				setInterval(function(){ 
+					document.getElementById("n.m").innerHTML = topicheads + "<tr>"+ "<td>"+getNewMessage().date+"</td>" + "<td>"+getNewMessage().subject+"</td>" + "<td>"+getNewMessage().sender+"</td>" +"</tr>";
+				}, 3000);
 
       };
 
