@@ -8,15 +8,17 @@
 
         //Loading inital message using for loop
       	var loaddata = "";
+      	var topicheads = "<tr>"+"<td><b>Date</b></td>"+"<td><b>Subject</b></td>"+"<td><b>Sender</b></td>"+"</tr>";
 
-	for (i = 0; i < geemails.length; i++) {
-    		loaddata += "<tr>"+ "<td>"+geemails[i].date+"</td>" + "<td>"+geemails[i].subject+"</td>" + "<td>"+geemails[i].sender+"</td>" +"</tr>";
-	}
+				for (i = 0; i < geemails.length; i++) {
+    			loaddata += "<tr>"+ "<td>"+geemails[i].date+"</td>" + "<td>"+geemails[i].subject+"</td>" + "<td>"+geemails[i].sender+"</td>" +"</tr>";
+				}
 				
-	document.getElementById("loadmail").innerHTML = "<tr>"+"<td><b>Date</b></td>"+"<td><b>Subject</b></td>"+"<td><b>Sender</b></td>"+"</tr>" + loaddata;
+				document.getElementById("loadmail").innerHTML =  topicheads + loaddata;
+				document.getElementById("inboxcount").innerHTML =  "Inbox ("+geemails.length+")";
 				
-	//Create a new message similar to the old messages
-	document.getElementById("n.m").innerHTML = "<tr>"+ "<td>"+getNewMessage().date+"</td>" + "<td>"+getNewMessage().subject+"</td>" + "<td>"+getNewMessage().sender+"</td>" +"</tr>";
+				//Create a new message similar to the old messages
+				document.getElementById("n.m").innerHTML = topicheads + "<tr>"+ "<td>"+getNewMessage().date+"</td>" + "<td>"+getNewMessage().subject+"</td>" + "<td>"+getNewMessage().sender+"</td>" +"</tr>";
 
       };
 
@@ -30,10 +32,12 @@
 
 		<div class="container" id="main">
 			
-			<div>Inbox</div>
+			<div id="inboxcount"></div>
 			<table id="loadmail" border="3px"></table>
 			<br>
-			<div>New Message</div>
+			<div id="messagecontent"></div>
+			<br>
+			<div><h3>New Message</h3></div>
 			<table id="n.m" border="3px"></table>
 
 
