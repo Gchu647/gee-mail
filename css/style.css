@@ -6,3 +6,17 @@ table {
 	font-size: 20px;
 	font-weight: bold;
 }
+
+#loadmail {
+  float: left;
+}
+
+#messagebody {
+	border: 3px solid gray;
+	position: relative;
+	height: 415px;
+	width: 500px;
+	margin-top: -18px;
+	margin-left: 510px;
+  padding: 1em;
+}
