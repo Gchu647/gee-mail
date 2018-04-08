@@ -6,25 +6,37 @@
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
 
-        //Loading inital message using for loop
-      	var loaddata = "";
-      	var topicheads = "<tr>"+"<td><b>Date</b></td>"+"<td><b>Subject</b></td>"+"<td><b>Sender</b></td>"+"</tr>";
+        var loaddata = "";
+      	var topicheads = "<tr>"+"<th><b>Date</b></th>"+"<th><b>Subject</b></th>"+"<th>Sender</th>"+"</tr>";
 
+        //Loading inital message into a table using for loop
 				for (i = 0; i < geemails.length; i++) {
     			loaddata += "<tr>"+ "<td>"+geemails[i].date+"</td>" + "<td>"+geemails[i].subject+"</td>" + "<td>"+geemails[i].sender+"</td>" +"</tr>";
 				}
 
-				
 				document.getElementById("loadmail").innerHTML =  topicheads + loaddata;
-				document.getElementById("inboxcount").innerHTML =  "Inbox ("+geemails.length+")";
-				
-				//Cant find a way to put create buttons using the for loop
-				document.getElementById('messagebody').innerHTML = "<b>Message Content:</b><br>" + geemails[1].body;
 
-				//Creates a new message similar to the old messages every 3 seconds				
+				document.getElementById("inboxcount").innerHTML =  "Inbox ("+geemails.length+")";
+
+				
+				//Adding EventListners to each rows of #loadmail using for loop
+				for (let i = 0; i <= geemails.length; i++) {
+    			document.getElementById("loadmail").rows[i].addEventListener('click', function() { viewMessage(i); } );
+				}
+
+				//This function displays the message body of the clicked row
+      	function viewMessage(num) {
+      		var x = document.getElementById("loadmail").rows[num].id 
+      		//document.getElementById('messagebody').innerHTML = "<b>This id ID name:</b><br>" + x;
+      		document.getElementById('messagebody').innerHTML = "<b>Message("+num+") Content</b>:"+"<br>" + geemails[num-1].body;
+      	}
+
+				//Creates a new message with similar properties as the 10 inital messages every 5 seconds
 				setInterval(function(){ 
 					document.getElementById("n.m").innerHTML = topicheads + "<tr>"+ "<td>"+getNewMessage().date+"</td>" + "<td>"+getNewMessage().subject+"</td>" + "<td>"+getNewMessage().sender+"</td>" +"</tr>";
-				}, 3000);
+					document.getElementById("n.m").rows[1].addEventListener('click', function() { document.getElementById('messagebody').innerHTML = "<b>Message(New) Content:</b><br>"+ getNewMessage().body; } );					
+
+				}, 5000);
 
       };
 
@@ -39,14 +51,14 @@
 		<div class="container" id="main">
 			
 			<div id="inboxcount"></div>
-			<table id="loadmail" border="3px solid gray"></table>
+			<table id="loadmail"></table>
 			<br>
 
 			<div id="messagebody"></div>
 			<br>
 			
 			<div><h3>New Message</h3></div>
-			<table id="n.m" border="3px"></table>
+			<table id="n.m"></table>
 
 
 		</div>
