@@ -1,5 +1,21 @@
+body {
+	font-family: Helvetica;
+	color: #101B2F;
+}
+
 table {
 	width: 500px;
+	border: 2px solid #79AEEE;
+	border-collapse: collapse;
+}
+
+td {
+	border:1px solid #79AEEE;
+}
+
+tr:hover {
+	background-color: #6E8491;
+	color: white;
 }
 
 #inboxcount {
@@ -12,9 +28,9 @@ table {
 }
 
 #messagebody {
-	border: 3px solid gray;
+	border: 2px solid #79AEEE;
 	position: relative;
-	height: 415px;
+	height: 378px;
 	width: 500px;
 	margin-top: -18px;
 	margin-left: 510px;
