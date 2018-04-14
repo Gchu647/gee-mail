@@ -4,7 +4,7 @@ body {
 }
 
 table {
-	width: 500px;
+	width: 900px;
 	border: 2px solid #79AEEE;
 	border-collapse: collapse;
 }
@@ -13,7 +13,7 @@ td {
 	border:1px solid #79AEEE;
 }
 
-tr:hover {
+table tr:nth-child(even):hover {
 	background-color: #6E8491;
 	color: white;
 }
@@ -24,10 +24,11 @@ tr:hover {
 }
 
 #loadmail {
-  float: left;
+  position: relative;
+ /*float: left;*/
 }
 
-#messagebody {
+/*#messagebody {
 	border: 2px solid #79AEEE;
 	position: relative;
 	height: 378px;
@@ -35,4 +36,4 @@ tr:hover {
 	margin-top: -18px;
 	margin-left: 510px;
   padding: 1em;
-}
+}*/
