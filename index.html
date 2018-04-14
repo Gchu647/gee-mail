@@ -9,34 +9,65 @@
         var loaddata = "";
       	var topicheads = "<tr>"+"<th><b>Date</b></th>"+"<th><b>Subject</b></th>"+"<th>Sender</th>"+"</tr>";
 
-        //Loading inital message into a table using for loop
-	for (i = 0; i < geemails.length; i++) {
-    		loaddata += "<tr>"+ "<td>"+geemails[i].date+"</td>" + "<td>"+geemails[i].subject+"</td>" + "<td>"+geemails[i].sender+"</td>" +"</tr>";
-	}
+        //Loading inital message into a table using for loop and display on html
+				for (i = 0; i < geemails.length; i++) {
+    			loaddata += "<tr>"+ "<td>"+geemails[i].date+"</td>" + "<td>"+geemails[i].subject+"</td>" + "<td>"+geemails[i].sender+"</td>" +"</tr>"
+    			+"<tr><td colspan='3'>Hi</td></tr>";
+				}
 
-	document.getElementById("loadmail").innerHTML =  topicheads + loaddata;
+				document.getElementById("loadmail").innerHTML =  topicheads + loaddata;
 
-	document.getElementById("inboxcount").innerHTML =  "Inbox ("+geemails.length+")";
+				//Keeps tracks of message in the inbox
+				document.getElementById("inboxcount").innerHTML =  "Inbox ("+geemails.length+")";
 
+				//Create IDs for #loadmail even rows and make it into hidden messages
+				for (i = 1; i < geemails.length*2+1; i++) {
+           if(i%2==0){
+              document.getElementById("loadmail").rows[i].id = "hidden_"+i;
+              document.getElementById("loadmail").rows[i].cells[0].style.display = "none";
+           }
+				}
 				
-	//Adding EventListners to each rows of #loadmail using for loop
-	for (let i = 0; i <= geemails.length; i++) {
-		document.getElementById("loadmail").rows[i].addEventListener('click', function() { viewMessage(i); } );
-	}
+				//Adding EventListners to all the odd rows of #loadmail using for loop
+				for (let i = 0; i <= geemails.length*2; i++) {
+    			if(i%2==1){
+    				document.getElementById("loadmail").rows[i].addEventListener('click', function() { viewMessage(i); } );
+					}
+				}
 
-	//This function displays the message body of the clicked row
+				//This function displays the geemails.bdy of the clicked row.
       	function viewMessage(num) {
-      		var x = document.getElementById("loadmail").rows[num].id 
-      		//document.getElementById('messagebody').innerHTML = "<b>This id ID name:</b><br>" + x;
-      		document.getElementById('messagebody').innerHTML = "<b>Message("+num+") Content</b>:"+"<br>" + geemails[num-1].body;
+ 			   	var x = document.getElementById("loadmail").rows[num+1].cells[0];
+
+ 			   	//Logic statement to determine which geemail body to show
+ 			   	if(num == 1) {
+ 			   		var num1 = num-1;
+ 			   	} else if(num == 3) {
+ 			   		var num1 = num-2;
+ 			   	} else {
+ 			   		var num1 = (num-1)/2;
+ 			   	}
+
+ 			   	//Tracking the number of the message we are showing
+ 			   	var num2 = num1 +1;
+
+ 			   	x.innerHTML = "<b>Message("+num2+") Content</b>:"+"<br>" + geemails[num1].body;
+
+   			 	if (x.style.display === "none") {
+        		x.style.display = "table-cell";
+    			} else {
+        		x.style.display = "none";
+    			}
+      		//var y = document.getElementById("loadmail").rows[num].id 
+      		//document.getElementById('messagebody').innerHTML = "<b>This id ID name:</b><br>" + y;
       	}
 
-	//Creates a new message with similar properties as the 10 inital messages every 5 seconds
-	setInterval(function(){ 
-		document.getElementById("n.m").innerHTML = topicheads + "<tr>"+ "<td>"+getNewMessage().date+"</td>" + "<td>"+getNewMessage().subject+"</td>" + "<td>"+getNewMessage().sender+"</td>" +"</tr>";
-		document.getElementById("n.m").rows[1].addEventListener('click', function() { document.getElementById('messagebody').innerHTML = "<b>Message(New) Content:</b><br>"+ getNewMessage().body; } );					
+				//Creates a new message with similar properties as the 10 inital messages every 5 seconds
+				setInterval(function(){ 
+					document.getElementById("n.m").innerHTML = topicheads + "<tr>"+ "<td>"+getNewMessage().date+"</td>" + "<td>"+getNewMessage().subject+"</td>" + "<td>"+getNewMessage().sender+"</td>" +"</tr>";
+					document.getElementById("n.m").rows[1].addEventListener('click', function() { document.getElementById('messagebody').innerHTML = "<b>Message(New) Content:</b><br>"+ getNewMessage().body; } );					
 
-	}, 5000);
+				}, 5000);
 
       };
 
@@ -52,9 +83,6 @@
 			
 			<div id="inboxcount"></div>
 			<table id="loadmail"></table>
-			<br>
-
-			<div id="messagebody"></div>
 			<br>
 			
 			<div><h3>New Message</h3></div>
