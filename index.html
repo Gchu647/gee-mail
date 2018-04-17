@@ -6,38 +6,38 @@
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
 
+        //Initial Variables
         var loaddata = "";
       	var topicheads = "<tr>"+"<th><b>Date</b></th>"+"<th><b>Subject</b></th>"+"<th>Sender</th>"+"</tr>";
       	var getnewm = topicheads;
+      	var test = "hi";
+      	var count = 0;
 
-        //Loading inital message into a table using for loop and display on html
+        //Loading 10 inital messages into a table using for loop
 				for (i = 0; i < geemails.length; i++) {
     			loaddata += "<tr>"+ "<td>"+geemails[i].date+"</td>" + "<td>"+geemails[i].subject+"</td>" + "<td>"+geemails[i].sender+"</td>" +"</tr>"
     			+"<tr><td colspan='3'>"+geemails[i].body;+"</td></tr>";
 				}
 
+				//Display initial messages and initial inbox count on screen
+				document.getElementById("inboxcount").innerHTML =  "Inbox (10)";
 				document.getElementById("loadmail").innerHTML =  topicheads + loaddata;
 
-
-				//Keeps tracks of message in the inbox
-				document.getElementById("inboxcount").innerHTML =  "Inbox ("+geemails.length+")";
-
-				//Make the even rows into hidden messages
+				//Hide the display of the even rows in loaddata
 				for (i = 1; i < geemails.length*2+1; i++) {
            if(i%2==0){
-              //document.getElementById("loadmail").rows[i].id = "hidden_"+i;
               document.getElementById("loadmail").rows[i].cells[0].style.display = "none";
            }
 				}
 				
-				//Adding EventListners to all the odd rows of #loadmail using for loop
+				//Adding EventListners to all the odd rows of loaddata
 				for (let i = 0; i <= geemails.length*2; i++) {
     			if(i%2==1){
     				document.getElementById("loadmail").rows[i].addEventListener('click', function() { viewMessage(i, 1); } );
 					}
 				}
 
-				//This function displays the geemails.body of the clicked row.
+				//This function can display the even rows of loaddata and newMessageGet
       	function viewMessage(num, checkp) {
 
       		if (checkp == 1) {
@@ -51,34 +51,45 @@
     			} else {
         		a.style.display = "none";
     			}
-      		//var y = document.getElementById("loadmail").rows[num].id 
-      		//document.getElementById('messagebody').innerHTML = "<b>This id ID name:</b><br>" + y;
       	}
 
 				//Creates a new message with similar properties as the 10 inital messages every 5 seconds
-				setInterval(function(){ 
+				var myTim = setInterval(newMessageGet, 15000);
+
+				//This function is called on by myTim to display getNewMessage properites on screen
+				function newMessageGet() {
 					var b = "<tr>"+ "<td>"+getNewMessage().date+"</td>" + "<td>"+getNewMessage().subject+"</td>" + "<td>"+getNewMessage().sender+"</td>" +"</tr>"+"<tr><td colspan='3'>"+getNewMessage().body+"</td></tr>";
 					getnewm += b;
 					document.getElementById("n.m").innerHTML = getnewm;
+					newMessageToggle();
 
-					//This evenlistener is just a test that I can click some stuff, but if I put this in a for loop it doesn't work
-					document.getElementById("n.m").rows[1].addEventListener('click', function() { alert("hi"); } );
+					count ++;
+					if(count==50) {
+      			clearInterval(myTim);
+      		}
 
-					/* This for loop is able to hide the message
-					for (i = 1; i < geemails.length*2+1; i++) {
-          	if(i%2==0){
-              	document.getElementById("n.m").rows[i].cells[0].style.display = "none";
-           	}
-					} */
+      		//Update the number of messages in the inbox
+      		var inboxnum = count+10;
+      		document.getElementById("inboxcount").innerHTML =  "Inbox ("+inboxnum+")";
 
-					/* This for loop is not able to click message
-					for (let i = 0; i <= geemails.length*2; i++) {
-    				if(i%2==1){
-    					//document.getElementById("n.m").rows[i].addEventListener('click', function() { viewMessage(i, 1); } );
+				}
+
+				//This function is called on by getNewMessageGet to toggle the display of the even rows
+				function newMessageToggle() {
+					for (i = 1; i < count*2+4; i++) {
+        	 	if(i%2==0){
+             	document.getElementById("n.m").rows[i].cells[0].style.display = "none";
+         		}
+					}
+
+					//Add toggle functionality to the rows
+					for (let j = 0; j < count*2+3; j++) {
+    				if(j%2==1){
+    					document.getElementById("n.m").rows[j].addEventListener('click', function() { viewMessage(j, 2); } );
 						}
-					} */
+					}
+				}
 
-				}, 5000);
 
       };
 
@@ -93,10 +104,11 @@
 		<div class="container" id="main">
 			
 			<div id="inboxcount"></div>
+			<div><h3>Old Messages</h3></div>
 			<table id="loadmail"></table>
 			<br>
 			
-			<div><h3>New Message</h3></div>
+			<div><h3>New Messages</h3></div>
 			<table id="n.m"></table>
 
 		</div>
